@@ -59,6 +59,438 @@
         </section>
 
         <section>
+          <section>
+            <h2 style="margin-left: 5%; text-align: left">ROS 2 - Why</h2>
+            <ul style="list-style: none; width: 90%">
+              <li>&nbsp;</li>
+              <li>ROS 1 is great!</li>
+              <li>&nbsp;</li>
+              <li>&nbsp;</li>
+              <li>&nbsp;</li>
+              <li class="fragment" data-fragment-index="1">But there are some things<br/>which are "improvable"...</li>
+              <li>&nbsp;</li>
+              <li>&nbsp;</li>
+              <li>&nbsp;</li>
+              <li>&nbsp;</li>
+            </ul>
+            <img src="image/frontend-backend-upper.png" width="55%" style="position: absolute; top: 15%; right: 0"/>
+            <img src="image/frontend-backend.png" width="55%" style="position: absolute; top: 15%; right: 0" class="fragment" data-fragment-index="1"/>
+            <svg id="frontend-backend" width="800" height="450" xmlns:xlink= "http://www.w3.org/1999/xlink" style="position: absolute; top: 25%; right: 0">
+              <g transform="rotate(-20) translate(120 290)" class="fragment" data-fragment-index="2">
+                <rect x="0" y="0" width="335" height="70" style="fill: white; stroke: gray"/>
+                <text x="10" y="30">Node vs. Nodelet API</text>
+                <text x="10" y="60">Why do I have to choose?</text>
+              </g>
+              <g transform="rotate(10) translate(460 240)" class="fragment" data-fragment-index="3">
+                <rect x="0" y="0" width="375" height="70" style="fill: white; stroke: gray"/>
+                <text x="10" y="30">rospack crawling vs. caching</text>
+                <text x="60" y="60">the bad and the ugly</text>
+              </g>
+              <g transform="rotate(-5) translate(0 380)" class="fragment" data-fragment-index="4">
+                <rect x="0" y="0" width="350" height="70" style="fill: white; stroke: gray"/>
+                <text x="10" y="30">Demand for more complex</text>
+                <text x="60" y="60">logic in launch files</text>
+              </g>
+              <g transform="rotate(5) translate(470 210)" class="fragment" data-fragment-index="5">
+                <rect x="0" y="0" width="300" height="40" style="fill: white; stroke: gray"/>
+                <text x="10" y="30">Microsoft Win... what?</text>
+              </g>
+              <g transform="rotate(15) translate(590 10)" class="fragment" data-fragment-index="6">
+                <rect x="0" y="0" width="160" height="40" style="fill: white; stroke: gray"/>
+                <text x="10" y="30">Real-time?</text>
+              </g>
+              <g transform="rotate(10) translate(50 210)" class="fragment" data-fragment-index="7">
+                <rect x="0" y="0" width="405" height="40" style="fill: white; stroke: gray"/>
+                <text x="10" y="30">XMLRPC on a micro-controller?</text>
+              </g>
+              <g transform="rotate(-20) translate(340 450)" class="fragment" data-fragment-index="8">
+                <rect x="0" y="0" width="270" height="70" style="fill: white; stroke: gray"/>
+                <text x="25" y="30">Wifi dropping out</text>
+                <text x="10" y="60">(almost) game over!</text>
+              </g>
+              <g transform="rotate(20) translate(120 220)" class="fragment" data-fragment-index="9">
+                <rect x="0" y="0" width="310" height="70" style="fill: white; stroke: gray"/>
+                <text x="10" y="30">Why does a Python pkg</text>
+                <text x="40" y="60">have a CMake file?</text>
+              </g>
+              <g transform="rotate(-5) translate(420 160)" class="fragment" data-fragment-index="10">
+                <rect x="0" y="0" width="335" height="70" style="fill: white; stroke: gray"/>
+                <text x="20" y="30">Try modifying a shared</text>
+                <text x="10" y="60">pointer after publishing...</text>
+              </g>
+              <g transform="rotate(0) translate(180 210)" class="fragment" data-fragment-index="11">
+                <rect x="0" y="0" width="350" height="70" style="fill: white; stroke: gray"/>
+                <text x="40" y="30">Prototyping was fun,</text>
+                <text x="10" y="60">but now start from scratch</text>
+              </g>
+            </svg>
+            <aside class="notes">
+              <ul>
+                <li>ROS 1 is great: tools, ready-to-use packages, community</li>
+                <li>Some things would be easier to address, tick-tock cycle.</li>
+                <li>Introduce new, deprecate old, remove deprecated stuff.</li>
+                <li>Other issue are "by design" and not (that easy) to fix.</li>
+                <li>Several breaking changes would affect *a lot of* packages.</li>
+              </ul>
+            </aside>
+          </section>
+
+          <section>
+            <h2 style="margin-left: 5%; text-align: left">What is the same, what is different</h2>
+            <ul style="list-style: none; width: 90%">
+              <li>Same concepts
+                <ul>
+                  <li>Nodes, messages, publishers, subscribers, services, ...</li>
+                  <li>Command line as well as graphical tools</li>
+                </ul>
+              </li>
+              <li style="font-size: 0.5em">&nbsp;</li>
+              <li class="fragment" data-fragment-index="1">Different [<a href="http://design.ros2.org/articles/changes.html"><i class="glyphicon glyphicon-link" style="color: #0000cc; font-size: 0.6em"></i></a>]
+                <ul>
+                  <li>Middleware interface [<a href="http://design.ros2.org/articles/ros_middleware_interface.html"><i class="glyphicon glyphicon-link" style="color: #0000cc; font-size: 0.6em"></i></a>]
+                    <ul style="font-size: 0.8em">
+                      <li>Reusing existing standards rather then developing "our" own</li>
+                      <li>DDS [<a href="http://design.ros2.org/articles/ros_on_dds.html"><i class="glyphicon glyphicon-link" style="color: #0000cc; font-size: 0.6em"></i></a>]: distributed discovery, serialization, transport, rich QoS, security</li>
+                      <li>Non-DDS implementation possible, e.g. using OPC UA</li>
+                    </ul>
+                  </li>
+                  <li>Modern technologies: CMake, C++ 14, Python 3.5, etc.</li>
+                  <li>Address design flaws:
+                    <ul style="font-size: 0.8em">
+                      <li>No crawling of the FS at runtime (<a href="https://github.com/ament/ament_cmake/blob/master/ament_cmake_core/doc/resource_index.md">ament resource index</a>)</li>
+                      <li>Choose process layout at deploy time (node vs. nodelet)</li>
+                      <li>...</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+            <p class="fragment" data-fragment-index="1">
+              <small>See the <a href="http://www.dirk-thomas.net/slides_roscon2015_state-of-ros2/2015-10-03_roscon_state-of-ros2.html">slides</a> / <a href="https://vimeo.com/142151734">video</a> from the ROSCon 2015 presentation for more information.</small>
+            </p>
+            <img src="image/eProsima_logo_only.png" style="position: absolute; top: 34%; right: 32%; width: 7%" class="fragment" data-fragment-index="1" />
+            <img src="image/adlink_logo_only.jpg" width="10%" style="position: absolute; top: 35%; right: 24%; width: 6%" class="fragment" data-fragment-index="1" />
+            <img src="image/rti_logo_only.jpeg" width="10%" style="position: absolute; top: 34%; right: 15%; width: 6%" class="fragment" data-fragment-index="1" />
+          </section>
+
+          <section>
+            <h2 style="margin-left: 5%; text-align: left">How to roll out "the new thing"</h2>
+            <ul style="list-style: none; width: 90%">
+              <li class="fragment" data-fragment-index="1"><i class="glyphicon glyphicon-thumbs-down" style="color: #cc0000"></i> Each ROS release: add new, deprecate old, remove ancient
+                <ul style="font-size: 0.9em">
+                  <li>That requires <b>every</b> package to move forward</li>
+                </ul>
+              </li>
+              <li>&nbsp;</li>
+              <li class="fragment" data-fragment-index="2"><i class="glyphicon glyphicon-thumbs-down" style="color: #cc0000"></i> Add new stuff in parallel in a ROS 1 distribution
+                <ul style="font-size: 0.9em">
+                  <li>Fragmentation and not transparent: <br/>some packages use <code>roscpp</code>, others <code>roscpp2</code></li>
+                </ul>
+              </li>
+              <li>&nbsp;</li>
+              <li class="fragment" data-fragment-index="3"><i class="glyphicon glyphicon-thumbs-up" style="color: #008800"></i> Release a separate distribution
+                <ul style="font-size: 0.9em">
+                  <li>Each package needs to opt-in when it wants to</li>
+                </ul>
+              </li>
+            </ul>
+            <p class="fragment" data-fragment-index="3">
+              <br/>
+              <small>See <a href="http://design.ros2.org/articles/why_ros2.html">this</a> design article for more information.</small>
+            </p>
+          </section>
+
+          <section>
+            <h2>ROS 2 Ardent Apalone</h2>
+            <small>released on Dec. 8th 2017</small>
+            <ul style="list-style: none; width: 100%">
+              <li>&nbsp;</li>
+              <li>&nbsp;</li>
+              <li>&nbsp;</li>
+              <li>&nbsp;</li>
+              <li>&nbsp;</li>
+              <li>&nbsp;</li>
+              <li>&nbsp;</li>
+              <li>&nbsp;</li>
+              <li>&nbsp;</li>
+            </ul>
+            <img src="image/ardent.png" style="position: absolute; top: 30%; left: 15%; width: 30%" />
+            <img src="image/apalone_spinifera.jpg" style="position: absolute; top: 31%; right: 15%; width: 30%" />
+            <small style="position: absolute; top: 67%; right: 20%">Spiny softshell turtle</small>
+
+            <svg id="ardent-patch-releases" width="800" height="450" xmlns:xlink= "http://www.w3.org/1999/xlink" style="position: absolute; top: 25%; right: 0">
+              <g transform="rotate(-20) translate(20 190)" class="fragment" data-fragment-index="2">
+                <rect x="0" y="0" width="365" height="160" style="fill: white; stroke: gray"/>
+                <text x="10" y="30">Patch release <a href="https://discourse.ros.org/t/new-packages-for-ardent-2018-02-09/3941">#1</a> on Feb. 9th</text>
+                <text x="10" y="60">- rviz2 for Windows</text>
+                <text x="10" y="90">- REP 149</text>
+                <text x="10" y="120">- include path fixes</text>
+                <text x="10" y="150">- FastRTPS improvements</text>
+              </g>
+              <g transform="rotate(10) translate(460 170)" class="fragment" data-fragment-index="3">
+                <rect x="0" y="0" width="375" height="70" style="fill: white; stroke: gray"/>
+                <text x="10" y="30">Path release <a href="">#2</a> on Mar. ?th</text>
+                <text x="10" y="60">- address issues with SROS</text>
+              </g>
+            </svg>
+
+            <p>
+              <br/>
+              <small>See <a href="https://github.com/ros2/ros2/wiki/Release-Ardent-Apalone">release page</a> for more information.</small>
+            </p>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h2>Where do we want to be?</h2>
+          </section>
+
+          <section>
+            <h2>Plug-n-play Sensors</h2>
+            <br/>
+            <div>
+              <img src="image/video-camera.svg" width="15%" alt=""/>
+            </div>
+            <br/>
+            <ul>
+              <li>Publisher: <code>/image</code></li>
+              <li>Parameter: <code>framerate</code>, <code>resolution</code></li>
+              <li>Server: <code>/set_parameter</code></li>
+            </ul>
+            <svg id="sensors" width="800" height="450" xmlns:xlink= "http://www.w3.org/1999/xlink" style="position: absolute; top: 25%; right: 0">
+              <g transform="rotate(-20) translate(240 470)" class="fragment" data-fragment-index="1">
+                <rect x="0" y="0" width="310" height="70" style="fill: white; stroke: gray"/>
+                <text x="10" y="30">Natively talking "ROS"</text>
+                <text x="10" y="60">on the wire</text>
+              </g>
+              <g transform="rotate(-20) translate(390 540)" class="fragment" data-fragment-index="1">
+                <image x="0" y="0" height="2em" width="2em" xlink:href="image/heartbeat.svg"/>
+              </g>
+            </svg>
+            <div style="font-size: 40%; margin: 10em 0 0 30%">
+              Icons made by <a href="https://www.flaticon.com/authors/kiranshastry" title="Kiranshastry">Kiranshastry</a> and <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a>
+            </div>
+            <aside class="notes">
+              <ul>
+                <li>Setting invalid combinations of parameters can be rejected by the node.</li>
+              </ul>
+            </aside>
+          </section>
+
+          <section>
+            <h2>Plug-n-play Actuators</h2>
+            <br/>
+            <div>
+              <img src="image/robot-arm.svg" width="15%" alt=""/>
+            </div>
+            <br/>
+            <ul>
+              <li>Subscriber: <code>/gripper_cmd</code>
+                <ul>
+                  <li style="list-style: none"><img src="image/locked.svg" width="15%" alt="" style="vertical-align: middle" class="fragment" data-fragment-index="2"/></li>
+                </ul>
+              </li>
+            </ul>
+            <svg id="plug-n-play-actuators" width="800" height="450" xmlns:xlink= "http://www.w3.org/1999/xlink" style="position: absolute; top: 25%; right: 0">
+              <g transform="rotate(-20) translate(240 410)" class="fragment" data-fragment-index="1">
+                <rect x="0" y="0" width="310" height="100" style="fill: white; stroke: gray"/>
+                <text x="10" y="30">Could be implemented</text>
+                <text x="10" y="60">on a micro controller</text>
+                <text x="10" y="90">- e.g. STM32</text>
+              </g>
+            </svg>
+            <div style="font-size: 40%; margin: 7em 0 0 30%">
+              Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> and <a href="https://www.flaticon.com/authors/smashicons" title="Smashicons">Smashicons</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a>
+            </div>
+          </section>
+          <section>
+            <h2>Control System</h2>
+            <div>
+              <img src="image/video-camera.svg" width="5%" style="vertical-align: middle" alt=""/>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              &rarr;
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <img src="image/motherboard.svg" width="15%" style="vertical-align: middle" alt=""/>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              &rarr;
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <img src="image/robot-arm.svg" width="5%" style="vertical-align: middle" alt=""/>
+            </div>
+            <ul>
+              <li>Subscribers: <code>/image_left</code>, <code>/image_right</code></li>
+              <li>Publisher: <code>/gripper_cmd</code></li>
+              <li style="list-style: none">&nbsp;</li>
+              <li>Components:
+                <ul style="font-size: 0.8em">
+                  <li><code>preprocessing image</code></li>
+                  <li><code>feature extraction</code></li>
+                  <li><code>gripping decision</code></li>
+                </ul>
+              </li>
+            </ul>
+            <svg id="control-system" width="950" height="450" xmlns:xlink= "http://www.w3.org/1999/xlink" style="position: absolute; top: 25%; right: 0">
+              <g transform="rotate(20) translate(60 90)" class="fragment" data-fragment-index="1">
+                <rect x="0" y="0" width="150" height="70" style="fill: white; stroke: gray"/>
+                <text x="10" y="30">Determist.</text>
+                <text x="10" y="60">startup</text>
+              </g>
+              <g transform="rotate(20) translate(100 180)" class="fragment" data-fragment-index="1">
+                <rect x="0" y="0" width="150" height="70" style="fill: white; stroke: gray"/>
+                <text x="25" y="30">Monitor</text>
+                <text x="25" y="60">health</text>
+              </g>
+              <g transform="rotate(20) translate(140 270)" class="fragment" data-fragment-index="1">
+                <rect x="0" y="0" width="180" height="70" style="fill: white; stroke: gray"/>
+                <text x="10" y="30">Dynamically</text>
+                <text x="10" y="60">reconfigure</text>
+              </g>
+              <g transform="rotate(-20) translate(380 440)" class="fragment" data-fragment-index="3">
+                <rect x="0" y="0" width="290" height="40" style="fill: white; stroke: gray"/>
+                <text x="10" y="30">Single loop, realtime?</text>
+              </g>
+              <g transform="rotate(-20) translate(350 500)" class="fragment" data-fragment-index="3">
+                <rect x="0" y="0" width="370" height="40" style="fill: white; stroke: gray"/>
+                <text x="10" y="30">Run in sep. proc. during dev</text>
+              </g>
+              <g transform="rotate(-20) translate(480 560)" class="fragment" data-fragment-index="3">
+                <image x="0" y="0" height="2em" width="2em" xlink:href="image/medal.svg"/>
+              </g>
+            </svg>
+            <div style="font-size: 40%; margin: 3em 0 0 30%">
+              Icons made by <a href="https://www.flaticon.com/authors/smashicons" title="Smashicons">Smashicons</a> and <a href="https://www.flaticon.com/authors/vectors-market" title="Vectors Market">Vectors Market</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a>
+            </div>
+            <aside class="notes">
+              <ul>
+                <li>May on a Raspberry Pi.</li>
+                <li>Access control for publishing to control topic.</li>
+                <li>Certifiable minimalistic system.</li>
+              </ul>
+            </aside>
+          </section>
+          <section>
+            <h2>External Systems</h2>
+            <br/>
+            <div>
+              <img src="image/line-chart.svg" width="15%" style="top: 200px; vertical-align: middle" alt=""/>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <img src="image/switch.svg" width="8%" style="vertical-align: middle" alt=""/>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              &harr;
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <img src="image/robot-arm.svg" width="5%" style="vertical-align: middle" alt=""/>
+            </div>
+            <br/>
+            <ul>
+              <li>Subscriber: e.g. <code>/gripper_cmd</code></li>
+              <li>Client: e.g. <code>/feature_extract/set_parameter</code></li>
+            </ul>
+            <svg id="external-systems" width="900" height="450" xmlns:xlink= "http://www.w3.org/1999/xlink" style="position: absolute; top: 25%; right: 0">
+              <g transform="rotate(-2) translate(60 300)" class="fragment" data-fragment-index="1">
+                <rect x="0" y="0" width="500" height="100" style="fill: white; stroke: gray"/>
+                <text x="10" y="30">Orchestration: pause components,</text>
+                <text x="10" y="60">unload some, load updated / different,</text>
+                <text x="10" y="90">reconfigure, resume</text>
+              </g>
+              <g transform="rotate(-10) translate(530 420)" class="fragment" data-fragment-index="1">
+                <rect x="0" y="0" width="170" height="40" style="fill: white; stroke: gray"/>
+                <text x="10" y="30">Diagnostics</text>
+              </g>
+            </svg>
+            <div style="font-size: 40%; margin: 10em 0 0 30%">
+              Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> and <a href="https://www.flaticon.com/authors/smashicons" title="Smashicons">Smashicons</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a>
+            </div>
+          </section>
+          <section>
+            <h2>External Systems</h2>
+            <br/>
+            <div>
+              <img src="image/pixelated.svg" width="15%" style="top: 200px; vertical-align: middle" alt=""/>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              &larr;
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <img src="image/cloud.svg" width="15%" style="vertical-align: middle" alt=""/>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              &larr;
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <img src="image/video-camera.svg" width="5%" style="vertical-align: middle" alt=""/>
+            </div>
+            <br/>
+            <ul>
+              <li>Subscriber: <code>/preprocessed_image</code></li>
+            </ul>
+            <svg id="external-systems2" width="800" height="450" xmlns:xlink= "http://www.w3.org/1999/xlink" style="position: absolute; top: 25%; right: 0">
+              <g transform="rotate(-10) translate(40 320)" class="fragment" data-fragment-index="1">
+                <rect x="0" y="0" width="320" height="70" style="fill: white; stroke: gray"/>
+                <text x="10" y="30">Lower rate and res.,</text>
+                <text x="10" y="60">compressed, best-effort</text>
+              </g>
+              <g transform="rotate(-10) translate(390 340)" class="fragment" data-fragment-index="1">
+                <rect x="0" y="0" width="210" height="70" style="fill: white; stroke: gray"/>
+                <text x="10" y="30">Static linking</text>
+                <text x="10" y="60">e.g. for Android</text>
+              </g>
+              <g transform="rotate(-10) translate(220 410)" class="fragment" data-fragment-index="1">
+                <rect x="0" y="0" width="120" height="40" style="fill: white; stroke: gray"/>
+                <text x="10" y="30">Logging</text>
+              </g>
+              <g transform="rotate(-10) translate(460 430)" class="fragment" data-fragment-index="1">
+                <image x="0" y="0" height="2em" width="2em" xlink:href="image/binary-code.svg"/>
+              </g>
+            </svg>
+            <div style="font-size: 40%; margin: 15em 0 0 30%">
+              Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a>, <a href="https://www.flaticon.com/authors/smashicons" title="Smashicons">Smashicons</a> and <a href="https://www.flaticon.com/authors/prosymbols" title="Prosymbols">Prosymbols</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a>
+            </div>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h2>Outlook</h2>
+            <ul>
+              <li>New releases every ~6 months
+                <ul style="font-size: 0.9em">
+                  <li>in June 2018: <i>Bouncy Bolson</i></li>
+                </ul>
+              </li>
+              <li style="list-style: none">&nbsp;</li>
+              <li>Support two releases at a time (same as in ROS 1, no LTS yet)
+                <ul style="font-size: 0.9em">
+                  <li>Major bug fixes</li>
+                  <li>Keep platforms working which have rolling dependencies (Mac OS, Windows)</li>
+                  <li>see the first two patch releases of <i>Ardent Apalone</i></li>
+                </ul>
+              </li>
+              <li style="list-style: none">&nbsp;</li>
+              <li>Items in the current cycle are updated on-the-fly (see <a href="https://github.com/ros2/ros2/wiki/Roadmap">roadmap</a>)<br/>
+                <small style="float: right; padding-right: 7%">as progress and/or resources permit</small>
+                <ul style="font-size: 0.9em">
+                  <li>Static remapping</li>
+                  <li>rosbag</li>
+                  <li>Launch system supporting components and leveraging life cycle</li>
+                  <li>Parameter support in C and Python</li>
+                  <li>...</li>
+                </ul>
+              </li>
+            </ul>
+          </section>
+
+          <section>
+            <div class="fixed_size">
+              <img src="image/already-there-if-not-contribute.jpg" width="30%" style="top: 10%; left: 35%"/>
+            </div>
+            <aside class="notes">
+              <ul>
+                <li>While many things are already</li>
+                <li>There are still many things to be done</li>
+                <li>If it is valuable to you consider contributing</li>
+              </ul>
+            </aside>
+          </section>
+        </section>
+
+        <section>
           <h2 style="text-align: left;">Questions...</h2>
           <img src="image/qrcode_2018-03-08_ros-industrial_ros2-is-here.svg" width="20%" style="text-align: left;" alt=""/>
           <br/>
